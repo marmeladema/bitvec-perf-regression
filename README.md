@@ -8,24 +8,16 @@ This small crate goal is to measure number of retired instructions when doing a 
 
 ## Instructions
 
-First, let's decompress the provided `results.json.bz2` file:
-
-```
-$ bunzip2 results.json.bz2
-```
-
-The decompressed JSON file takes about 117M. Make sure you have enough disk space.
-
-Then, let's build the crate:
+First, let's build the crate:
 
 ```
 $ cargo build --release
 ```
 
-Finally, let's run the example:
+Then, let's run the example:
 
 ```
-$ setarch x86_64 -R nice -20 taskset -c 3,7 cargo run --release -- results.json
+$ setarch x86_64 -R nice -20 taskset -c 3,7 cargo run --release
 ```
 
 Why not using `cargo` directly? Because those tools help improve reproducibility of results:
@@ -41,16 +33,16 @@ On my machine, a `Lenovo ThinkPad T480s` with an `Intel(R) Core(TM) i7-8650U CPU
 * rust 1.47.0:
 
 ```
-instructions:u = 1272309573
+instructions:u = 1012840155
 ```
 
 * rust 1.48.0:
 
 ```
-instructions:u = 1576958223
+instructions:u = 1732620218
 ```
 
-That's a performance regression of about `24%`.
+That's a performance regression of about `71%`.
 
 ## `rust` bisection
 
